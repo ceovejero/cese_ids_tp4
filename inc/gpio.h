@@ -39,7 +39,6 @@ extern "C" {
 
 /* === Public macros definitions =============================================================== */
 
-
 typedef struct gpio_h * gpio_t;
 
 /* === Public data type declarations =========================================================== */
@@ -48,6 +47,13 @@ typedef struct gpio_h * gpio_t;
 
 /* === Public function declarations ============================================================ */
 
+/**
+ * @brief Funcion para crear un puerto digital
+ *
+ * @param port Numero de puerto GPIO correspondiente
+ * @param bit  Numero de bit asignado al puerto
+ * @return gpio_t Puntero al objeto creado
+ */
 gpio_t GpioCreate(uint8_t port, uint8_t bit);
 
 void GpioSetDirection(gpio_t gpio, bool output);
@@ -58,7 +64,7 @@ void GpioSetState(gpio_t gpio, bool state);
 
 /**
  * @brief Funcion para consultar el estado de un puerto digital
- * 
+ *
  * @param gpio Puntero al objeto obtenido al llamar a la funcion GpioCreate \ref GpioCreate
  * @return true El puerto digital esta encendido
  * @return false El puerto digital esta apagado
