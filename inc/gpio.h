@@ -22,7 +22,7 @@ SPDX-License-Identifier: MIT
 #ifndef GPIO_H
 #define GPIO_H
 
-/** @file
+/** @file gpio.h
  ** @brief Capa de abstracion para gestion de puertos digitales
  **/
 
@@ -56,10 +56,29 @@ typedef struct gpio_h * gpio_t;
  */
 gpio_t GpioCreate(uint8_t port, uint8_t bit);
 
+/**
+ * @brief Funcion para establecer el sentido de la comunicacion del puerto: I/O
+ *
+ * @param gpio Puntero al objeto obtenido al llamar a la funcion GpioCreate
+ * @param output true El puerto esta como salida
+ */
 void GpioSetDirection(gpio_t gpio, bool output);
 
+/**
+ * @brief Funcion para consultar el sentido de comunicacion de un puerto: I/O
+ *
+ * @param gpio Puntero al objeto obtenido al llamar a la funcion GpioCreate
+ * @return true El puerto esta como salida
+ * @return false El puerto esta como entrada
+ */
 bool GpioGetDirection(gpio_t gpio);
 
+/**
+ * @brief Funcion para establecer el estado de un puerto digital
+ *
+ * @param gpio Puntero al objeto obtenido al llamar a la funcion GpioCreate
+ * @param state true El puerto digital esta encendido
+ */
 void GpioSetState(gpio_t gpio, bool state);
 
 /**
