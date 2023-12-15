@@ -19,14 +19,17 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef GPIO_H
+#define GPIO_H
 
-/** @file main.h
- ** @brief Definición de la función principal del programa
+/** @file gpio.h
+ ** @brief Capa de abstracion para gestion de puertos digitales
  **/
 
 /* === Headers files inclusions ================================================================ */
+
+#include <stdint.h>
+#include <stdbool.h>
 
 /* === Cabecera C++ ============================================================================ */
 
@@ -36,6 +39,8 @@ extern "C" {
 
 /* === Public macros definitions =============================================================== */
 
+typedef struct gpio_h * gpio_t;
+
 /* === Public data type declarations =========================================================== */
 
 /* === Public variable declarations ============================================================ */
@@ -43,13 +48,47 @@ extern "C" {
 /* === Public function declarations ============================================================ */
 
 /**
- * @brief Función principal
+ * @brief Funcion para crear un puerto digital
  *
- * @param
- *
- * @return
+ * @param port Numero de puerto GPIO correspondiente
+ * @param bit  Numero de bit asignado al puerto
+ * @return gpio_t Puntero al objeto creado
  */
-int main(void);
+gpio_t GpioCreate(uint8_t port, uint8_t bit);
+
+/**
+ * @brief Funcion para establecer el sentido de la comunicacion del puerto: I/O
+ *
+ * @param gpio Puntero al objeto obtenido al llamar a la funcion GpioCreate
+ * @param output true El puerto esta como salida
+ */
+void GpioSetDirection(gpio_t gpio, bool output);
+
+/**
+ * @brief Funcion para consultar el sentido de comunicacion de un puerto: I/O
+ *
+ * @param gpio Puntero al objeto obtenido al llamar a la funcion GpioCreate
+ * @return true El puerto esta como salida
+ * @return false El puerto esta como entrada
+ */
+bool GpioGetDirection(gpio_t gpio);
+
+/**
+ * @brief Funcion para establecer el estado de un puerto digital
+ *
+ * @param gpio Puntero al objeto obtenido al llamar a la funcion GpioCreate
+ * @param state true El puerto digital esta encendido
+ */
+void GpioSetState(gpio_t gpio, bool state);
+
+/**
+ * @brief Funcion para consultar el estado de un puerto digital
+ *
+ * @param gpio Puntero al objeto obtenido al llamar a la funcion GpioCreate \ref GpioCreate
+ * @return true El puerto digital esta encendido
+ * @return false El puerto digital esta apagado
+ */
+bool GpioGetState(gpio_t gpio);
 
 /* === End of documentation ==================================================================== */
 
@@ -57,4 +96,4 @@ int main(void);
 }
 #endif
 
-#endif /* MAIN_H */
+#endif /* GPIO_H */
